@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:town.ceo)",
+      "WebSearch",
+      "WebFetch(domain:www.producthunt.com)",
+      "WebFetch(domain:www.thisandthat.chat)",
+      "WebFetch(domain:www.town.com)",
+      "WebFetch(domain:checkthat.ai)",
+      "WebFetch(domain:www.platformer.news)",
+      "WebFetch(domain:finance.yahoo.com)",
+      "PowerShell(New-Item -ItemType Directory -Force \"f:\\\\Time to build\\\\docs\\\\plans\")",
+      "PowerShell(cd \"f:\\\\Time to build\"; $pkgs = @\\(\"next\",\"react\",\"react-dom\",\"three\",\"@react-three/fiber\",\"@react-three/drei\"\\); foreach \\($p in $pkgs\\) { $pj = Get-Content \"node_modules/$\\($p.Replace\\('@','@'\\).Replace\\('/','\\\\'\\)\\)/package.json\" | ConvertFrom-Json; \"$p@$\\($pj.version\\)\" })"
+    ]
+  }
+}

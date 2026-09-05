@@ -14,7 +14,10 @@ export default defineSchema({
       v.literal("tower"),
       v.literal("wide"),
       v.literal("skyscraper"),
-      v.literal("small")
+      v.literal("small"),
+      v.literal("pyramid"),
+      v.literal("clocktower"),
+      v.literal("bridge")
     ),
     currentBid: v.float64(),
     highestBidder: v.optional(v.string()),
@@ -23,7 +26,12 @@ export default defineSchema({
     adWebsite: v.optional(v.string()),
     adTagline: v.optional(v.string()),
     adColor: v.optional(v.string()),
+    logoUrl: v.optional(v.string()),
     color: v.optional(v.string()),
+    // Metric fields
+    impressions: v.optional(v.float64()),
+    prestigeScore: v.optional(v.float64()),
+    category: v.optional(v.string()),
   }),
   bids: defineTable({
     spotId: v.id("spots"),

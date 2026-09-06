@@ -1030,6 +1030,11 @@ const PRESETS: Record<PresetView, { center: [number, number]; zoom: number; pitc
   transamericacar: { center: [-122.4025, 37.7948], zoom: 18.2, pitch: 70, bearing: -10 },
 };
 
+// Carto's vector tiles render reliably from the public GitHub Pages origin and
+// expose the OpenMapTiles-compatible building fields used by our 3D layer.
+const MAP_STYLE_URL = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+const BUILDINGS_SOURCE = "carto";
+
 /* ── Main Component ────────────────────────────── */
 const SFMap = forwardRef<SFMapHandle, Props>(({ spots, onSpotClick, highlightId, theme = "day" }, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1067,7 +1072,7 @@ const SFMap = forwardRef<SFMapHandle, Props>(({ spots, onSpotClick, highlightId,
 
     const map = new maplibregl.Map({
       container: containerRef.current,
-      style: "https://tiles.openfreemap.org/styles/liberty",
+      style: MAP_STYLE_URL,
       center: PRESETS.overview.center,
       zoom: PRESETS.overview.zoom,
       pitch: PRESETS.overview.pitch,
@@ -1145,9 +1150,9 @@ const SFMap = forwardRef<SFMapHandle, Props>(({ spots, onSpotClick, highlightId,
       const firstSymbolLayerId = map.getStyle().layers?.find((layer) => layer.type === "symbol")?.id;
       map.addLayer({
         id: "3d-buildings-extrusion",
-        source: "openmaptiles",
+        source: BUILDINGS_SOURCE,
         "source-layer": "building",
-        filter: ["==", "extrude", "true"],
+        filter: ["has", "render_height"],
         type: "fill-extrusion",
         minzoom: 13,
         paint: {
